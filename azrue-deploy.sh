@@ -289,7 +289,7 @@
                 "typeHandlerVersion": "2.0",
                 "settings": {
                     "fileUris": [
-                        "https://seafile.actionsky.com/seafhttp/files/641fc9e6-d673-44e9-8dff-54bd44b54ec9/dbproxy_install.sh"
+                        "https://github.com/jesseyoung/mygit/blob/master/dbproxy_install.sh"
                     ],
                     "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'))]"
                 }
