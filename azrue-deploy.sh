@@ -37,17 +37,17 @@
         },
 
         "publicIPAddresses_actionTestVM_ip_name": {
-            "defaultValue": "actiontestvmip",
+            "defaultValue": "actiontestvmip100",
             "type": "String"
         },
 
         "mysqlMasterServer": {
             "type": "string",
-            "defaultValue": "actionmaster"
+            "defaultValue": "actionmaster100"
         },
         "mysqlSlaveServer": {
             "type": "string",
-            "defaultValue": "actionslave"
+            "defaultValue": "actionslave100"
         },
         "mysqlUser": {
             "type": "string",
@@ -297,7 +297,7 @@
         },
     ],
     "variables": {
-        "storageAccountName": "centosstorageaccount",
+        "storageAccountName": "centosstorageaccount100",
         "virtualNetworkPrefix": "10.0.0.0/16",
         "virtualNetworkSubnet1Name": "Subnet-1",
         "virtualNetworkSubnet1Prefix": "10.0.0.0/24",
