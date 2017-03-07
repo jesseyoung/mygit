@@ -297,7 +297,7 @@
         },
     ],
     "variables": {
-        "storageAccountName": "centosstorageaccount100",
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id),'storage')]",
         "virtualNetworkPrefix": "10.0.0.0/16",
         "virtualNetworkSubnet1Name": "Subnet-1",
         "virtualNetworkSubnet1Prefix": "10.0.0.0/24",
