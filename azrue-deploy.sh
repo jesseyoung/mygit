@@ -289,7 +289,7 @@
                 "typeHandlerVersion": "2.0",
                 "settings": {
                     "fileUris": [
-                        "https://github.com/jesseyoung/mygit/blob/master/dbproxy_install.sh"
+                        "https://raw.githubusercontent.com/jesseyoung/mygit/master/dbproxy_install.sh"
                     ],
                     "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'))]"
                 }
