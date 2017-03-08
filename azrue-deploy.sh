@@ -4,7 +4,10 @@
     "parameters": {
         "virtualMachineCentOSVersion": {
             "type": "string",
-            "defaultValue": "6.8"
+            "defaultValue": "6.8",
+            "allowedValues": [
+                "6.8"
+            ]
         },
         "virtualMachineName": {
             "type": "string",
