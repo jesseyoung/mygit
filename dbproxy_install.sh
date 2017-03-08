@@ -99,6 +99,13 @@ echo 'Persist finished...'
 echo 'Install complete.'
 }
 
+Removing(){
+echo 'Clean install package.'
+rm -f $DBP
+rm -f $JDK
+rm -f $ROUTER
+}
+
 if [ $# -lt 6 ];then
 	echo "You must entry 6 parameter at least."
 	echo "eg. ./dbproxy_install.sh master_user master_password 10.1.1.1 3306 10.1.1.2 3306"
@@ -112,3 +119,4 @@ Install
 Configure
 Starting
 Routing
+Removing
