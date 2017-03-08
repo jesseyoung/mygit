@@ -4,11 +4,7 @@
     "parameters": {
         "virtualMachineCentOSVersion": {
             "type": "string",
-            "defaultValue": "6.8",
-            "allowedValues": [
-                "6.8",
-                "7.1"
-            ]
+            "defaultValue": "6.8"
         },
         "virtualMachineName": {
             "type": "string",
@@ -36,11 +32,6 @@
                 "Premium_LRS"
             ]
         },
-        "storageAccountName": {
-            "type": "string",
-            "defaultValue": "centosstorageaccount112",
-        },
-
 
         "publicIPAddresses_actionDNS": {
             "defaultValue": "actiontestvmip112",
@@ -225,7 +216,7 @@
             "resources": [],
         },
         {
-            "name": "[parameters('storageAccountName')]",
+            "name": "[variables('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "location": "chinaeast",
             "apiVersion": "2015-06-15",
@@ -243,7 +234,7 @@
             "location": "chinaeast",
             "apiVersion": "2015-06-15",
             "dependsOn": [
-                "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+                "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
                 "[concat('Microsoft.Network/networkInterfaces/', variables('virtualMachineNicName'))]"
             ],
             "tags": {
@@ -268,7 +259,7 @@
                     "osDisk": {
                         "name": "virtualMachineOSDisk",
                         "vhd": {
-                            "uri": "[concat('http://', parameters('storageAccountName'), '.blob.core.chinacloudapi.cn/', variables('virtualMachineStorageAccountContainerName'), '/', variables('virtualMachineOSDiskName'), '.vhd')]"
+                            "uri": "[concat('http://', variables('storageAccountName'), '.blob.core.chinacloudapi.cn/', variables('virtualMachineStorageAccountContainerName'), '/', variables('virtualMachineOSDiskName'), '.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -303,6 +294,7 @@
         },
     ],
     "variables": {
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id),'storage')]",
         "virtualNetworkPrefix": "10.0.0.0/16",
         "virtualNetworkSubnet1Name": "Subnet-1",
         "virtualNetworkSubnet1Prefix": "10.0.0.0/24",
@@ -323,4 +315,3 @@
         "mysqlPort": "[parameters('mysqlPorts')]",
     }
 }
-
