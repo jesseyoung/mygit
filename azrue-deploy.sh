@@ -51,19 +51,22 @@
         },
         "mysqlUser": {
             "type": "string",
-            "defaultValue": "action",
+            "defaultValue": "action"
         },
         "mysqlUserPassword": {
             "type": "securestring",
-            "defaultValue": "actionsky",
+            "defaultValue": "actionsky"
         },
         "mysqlPorts": {
             "type": "string",
             "defaultValue": "3306",
+            "allowedValues": [
+                "3306"
+            ]
         },
         "mysqlDBName": {
             "type": "string",
-            "defaultValue": "actionsky",
+            "defaultValue": "actionsky"
         }
     },
     "resources": [
@@ -291,7 +294,7 @@
                     "fileUris": [
                         "https://raw.githubusercontent.com/jesseyoung/mygit/master/dbproxy_install.sh"
                     ],
-                    "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'))]"
+                    "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'), ' ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ',  parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'))]"
                 }
             }
         },
