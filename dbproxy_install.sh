@@ -3,24 +3,29 @@
 #Company by Shanghai Action
 #Author by Renzhongyu
 #Create Date by 2017-02-16
-#Modify Date by 2017-02-23
+#Modify Date by 2017-03-14
 
 APP_DIR=/opt/actionisky_proxy
 JDK_DIR='jdk1.7.0_45'
-DBP_DIR='dbproxy_2.2.3'
+DBP_DIR='dbproxy_2.2.7'
 JDK='/opt/jdk-7u45-linux-x64.tar.gz'
-DBP='/opt/dbproxy_2.2.3.zip'
+DBP='/opt/dbproxy_2.2.7.zip'
 DBPI='/opt/dbproxy'
 ROUTER='/opt/router.xml'
 
-M_IP=$1
-M_PORT=$2
-M_USER=$3
-M_PASS=$4
-S_IP=$5
-S_PORT=$6
-S_USER=$7
-S_PASS=$8
+M_USER=$1
+M_PASS=$2
+M_IP=$3
+M_PORT=$4
+
+S_USER=$5
+S_PASS=$6
+S_IP=$7
+S_PORT=$8
+
+DBP_USER=$9
+DBP_PASS=${10}
+
 
 Download(){
 echo 'Begin download package for dbproxy...'
@@ -28,7 +33,7 @@ if [ ! -d "/opt" ];then
 	mkdir /opt
 fi
 
-curl -0Lo /opt/dbproxy_2.2.3.zip https://seafile.actionsky.com/f/9feda52ef7/?raw=1
+curl -0Lo /opt/dbproxy_2.2.7.zip https://seafile.actionsky.com/f/307767e147/?raw=1
 curl -0Lo /opt/router.xml https://seafile.actionsky.com/f/48dcabeafa/?raw=1
 curl -0Lo /opt/jdk-7u45-linux-x64.tar.gz https://seafile.actionsky.com/f/d4b93a8635/?raw=1
 curl -0Lo /opt/dbproxy https://seafile.actionsky.com/f/898d616f13/?raw=1
@@ -71,12 +76,18 @@ sed -i "s/db.password=admin/db.password=/" $APP_DIR/$DBP_DIR/target/etc/conf.pro
 sed -i "s/monitorReplication=false/monitorReplication=true/" $APP_DIR/$DBP_DIR/target/etc/conf.properties
 
 mv $APP_DIR/$DBP_DIR/target/etc/router.xml $APP_DIR/$DBP_DIR/target/etc/router.xml.bak
-sed -i "s/ianholtestinstall%ianhol/$M_USER/" $ROUTER
-sed -i "s/young/$M_PASS/" $ROUTER
-sed -i "s/ianholtestinstall.mysqldb.chinacloudapi.cn/$M_IP/" $ROUTER
-sed -i "s/master_3306/$M_PORT/" $ROUTER
-sed -i "s/ianholtestinstall2.mysqldb.chinacloudapi.cn/$S_IP/" $ROUTER
-sed -i "s/slave_3306/$S_PORT/" $ROUTER
+sed -i "s/mysql_user1/$M_USER/" $ROUTER
+sed -i "s/mysql_passwd1/$M_PASS/" $ROUTER
+sed -i "s/mysql_host1/$M_IP/" $ROUTER
+sed -i "s/mysql_port1/$M_PORT/" $ROUTER
+
+sed -i "s/mysql_user2/$S_USER/" $ROUTER
+sed -i "s/mysql_passwd2/$S_PASS/" $ROUTER
+sed -i "s/mysql_host2/$S_IP/" $ROUTER
+sed -i "s/mysql_port2/$S_PORT/" $ROUTER
+
+sed -i "s/proxy_user/$DBP_USER/" $ROUTER
+sed -i "s/proxy_passwd/$DBP_PASS/" $ROUTER
 cp $ROUTER $APP_DIR/$DBP_DIR/target/etc/
 }
 
@@ -94,7 +105,7 @@ chkconfig --level 2345 dbproxy on
 Routing(){
 echo 'Persist router information to meta database...'
 mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@add;"
-mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@commit;"
+#mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@commit;"
 echo 'Persist finished...'
 echo 'Install complete.'
 }
@@ -104,11 +115,12 @@ echo 'Clean install package.'
 rm -f $DBP
 rm -f $JDK
 rm -f $ROUTER
+rm -f $DBPI
 }
 
 if [ $# -lt 6 ];then
 	echo "You must entry 6 parameter at least."
-	echo "eg. ./dbproxy_install.sh master_user master_password 10.1.1.1 3306 10.1.1.2 3306"
+	echo "eg. ./dbproxy_install.sh master_user master_password master_ip master_port slave_user slave_passwod slave_ip slave_port dbp_user dbp_password"
 	exit 1
 fi
 
@@ -120,3 +132,4 @@ Configure
 Starting
 Routing
 Removing
+
