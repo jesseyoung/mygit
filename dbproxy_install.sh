@@ -53,16 +53,8 @@ rpm -e `rpm -qa | grep jdk` 2> /dev/null
 tar xfz $JDK -C $APP_DIR
 ln -s $APP_DIR/$JDK_DIR/bin/java /usr/bin/ 
 
-echo 'Install MySQL meta database for DBproxy...'
-yum install -y mysql-server mysql mysql-devel 1>/dev/null
-chkconfig --level 2345  mysqld on
-/etc/init.d/mysqld start 1>/dev/null
-
 echo 'Install DBproxy...'
 unzip $DBP -d $APP_DIR 1>/dev/null
-
-echo 'Load routing sql to meta database...'
-mysql < $APP_DIR/$DBP_DIR/initRouter.sql
 
 echo 'Finish install...'
 }
