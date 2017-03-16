@@ -98,13 +98,13 @@ chkconfig --level 2345 dbproxy on
 /etc/init.d/dbproxy start
 }
 
-Routing(){
-echo 'Persist router information to meta database...'
-mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@add;"
+#Routing(){
+#echo 'Persist router information to meta database...'
+#mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@add;"
 #mysql -uactionsky -pgold -h127.0.0.1 -P8808 -e "route @@commit;"
-echo 'Persist finished...'
-echo 'Install complete.'
-}
+#echo 'Persist finished...'
+#echo 'Install complete.'
+#}
 
 Removing(){
 echo 'Clean install package.'
@@ -126,6 +126,6 @@ Download
 Install
 Configure
 Starting
-Routing
+#Routing
 Removing
 
