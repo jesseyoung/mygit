@@ -294,7 +294,7 @@
                     "fileUris": [
                         "https://raw.githubusercontent.com/jesseyoung/mygit/master/dbproxy_install.sh"
                     ],
-                    "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlUserFullName'), ' ', parameters('mysqlUserPassword'), ' ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlUserFullName'), ' ',  parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', parameters('mysqlUser'), ' ', parameters('mysqlUserPassword'))]"
+                    "commandToExecute": "[concat('bash dbproxy_install.sh ',variables('mysqlMasterFullName'), ' ', parameters('mysqlUserPassword'), ' ',variables('mysqlMasterURL'), ' ', parameters('mysqlPorts'), ' ', variables('mysqlSlaveFullName'), ' ',  parameters('mysqlUserPassword'), ' ', variables('mysqlSlaveURL'), ' ', parameters('mysqlPorts'), ' ', parameters('mysqlUser'), ' ', parameters('mysqlUserPassword'))]"
                 }
             }
         },
@@ -316,7 +316,8 @@
         "virtualMachineNicName": "[concat(parameters('virtualMachineName'), 'NetworkInterface')]",
         "mysqlMasterURL": "[concat(parameters('mysqlMasterServer'), '.mysqldb.chinacloudapi.cn')]",
         "mysqlSlaveURL": "[concat(parameters('mysqlSlaveServer'), '.mysqldb.chinacloudapi.cn')]",
-        "mysqlUserFullName": "[concat(parameters('mysqlMasterServer'), '%', parameters('mysqlUser'))]",
+        "mysqlMasterFullName": "[concat(parameters('mysqlMasterServer'), '%', parameters('mysqlUser'))]",
+        "mysqlSlaveFullName": "[concat(parameters('mysqlSlaveServer'), '%', parameters('mysqlUser'))]",
         "mysqlUserPasswd": "[parameters('mysqlUserPassword')]",
         "mysqlPort": "[parameters('mysqlPorts')]",
     }
