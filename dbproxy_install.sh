@@ -70,7 +70,6 @@ cp $APP_DIR/$DBP_DIR/target/etc/conf.properties $APP_DIR/$DBP_DIR/target/etc/con
 sed -i "s/\(mysql:\/\/\).*\(\/paralleldb\)/\1127.0.0.1:3306\2/" $APP_DIR/$DBP_DIR/target/etc/conf.properties
 sed -i "s/db.username=admin/db.username=root/" $APP_DIR/$DBP_DIR/target/etc/conf.properties
 sed -i "s/db.password=admin/db.password=/" $APP_DIR/$DBP_DIR/target/etc/conf.properties
-sed -i "s/monitorReplication=false/monitorReplication=true/" $APP_DIR/$DBP_DIR/target/etc/conf.properties
 
 mv $APP_DIR/$DBP_DIR/target/etc/router.xml $APP_DIR/$DBP_DIR/target/etc/router.xml.bak
 sed -i "s/mysql_user1/$M_USER/" $ROUTER
